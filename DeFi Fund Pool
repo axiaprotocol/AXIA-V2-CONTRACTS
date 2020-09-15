@@ -1,3 +1,4 @@
+
 /*
 
 * @dev This is the Axia Protocol Staking pool 2 contract (Defi Fund Pool), 
@@ -203,7 +204,7 @@ contract DSP{
     
     uint256 constant private FLOAT_SCALAR = 2**64;
     uint256 public MINIMUM_STAKE = 1000000000000000000; // 1 minimum
-	uint256 public MIN_DIVIDENDS_DUR = 86400;
+	uint256 public MIN_DIVIDENDS_DUR = 600;
 	
 	uint public infocheck;
     
@@ -244,6 +245,7 @@ contract DSP{
     }
     
 	 function tokenconfigs(address _axiatoken, address _defiindex) public onlyCreator returns (bool success) {
+        require(_axiatoken != _defiindex, "Insertion of same address is not supported");
         Axiatoken = _axiatoken;
         DefiIndexFunds = _defiindex;
         return true;
@@ -255,7 +257,7 @@ contract DSP{
 		
 	}
 	
-	function stakaingStatus(bool _status) public onlyCreator {
+	function stakingStatus(bool _status) public onlyCreator {
 	stakingEnabled = _status;
     }
     
